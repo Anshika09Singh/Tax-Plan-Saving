@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | TaxFlow Assistant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Outfit', 'Inter', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            500: '#22c55e',
+                            600: '#16a34a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .premium-input {
+            background: rgba(2, 6, 23, 0.5);
+            border: 1px solid rgba(30, 41, 59, 1);
+            transition: all 0.3s ease;
+        }
+        .premium-input:focus {
+            border-color: rgba(34, 197, 94, 0.5);
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-200 font-sans min-h-screen flex items-center justify-center p-6">
+    <div class="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-900/20 via-slate-950 to-slate-950"></div>
+
+    <div class="w-full max-w-md space-y-8 animate-in fade-in zoom-in duration-700">
+        <div class="text-center space-y-2">
+            <h1 class="text-4xl font-bold text-white tracking-tight">TaxFlow</h1>
+            <p class="text-slate-400 font-light">Your intelligent tax saving partner</p>
+        </div>
+
+        <div class="glass-panel p-8 rounded-[2rem] shadow-2xl">
+            <!-- Tabs -->
+            <div class="flex p-1 bg-slate-900/50 rounded-xl mb-8">
+                <button id="tab-login" class="flex-1 py-2 text-sm font-medium rounded-lg transition-all bg-brand-600 text-white">Login</button>
+                <button id="tab-signup" class="flex-1 py-2 text-sm font-medium rounded-lg transition-all text-slate-400 hover:text-white">Sign Up</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="login-form" class="space-y-6">
+                <div class="space-y-2">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest ml-1">Username</label>
+                    <input type="text" id="login-username" required class="premium-input w-full px-5 py-3 rounded-xl text-white outline-none">
+                </div>
+                <div class="space-y-2">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest ml-1">Password</label>
+                    <input type="password" id="login-password" required class="premium-input w-full px-5 py-3 rounded-xl text-white outline-none">
+                </div>
+                <button type="submit" class="w-full py-4 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl transition-all shadow-lg shadow-brand-950/50 active:scale-95">
+                    Sign In
+                </button>
+            </form>
+
+            <!-- Signup Form (Hidden by default) -->
+            <form id="signup-form" class="space-y-6 hidden">
+                <div class="space-y-2">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest ml-1">Full Name</label>
+                    <input type="text" id="signup-name" required class="premium-input w-full px-5 py-3 rounded-xl text-white outline-none">
+                </div>
+                <div class="space-y-2">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest ml-1">Username</label>
+                    <input type="text" id="signup-username" required class="premium-input w-full px-5 py-3 rounded-xl text-white outline-none">
+                </div>
+                <div class="space-y-2">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest ml-1">Password</label>
+                    <input type="password" id="signup-password" required class="premium-input w-full px-5 py-3 rounded-xl text-white outline-none">
+                </div>
+                <button type="submit" class="w-full py-4 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl transition-all shadow-lg shadow-brand-950/50 active:scale-95">
+                    Create Account
+                </button>
+            </form>
+
+            <p id="message" class="mt-6 text-center text-sm text-accent-coral font-medium min-h-[1.25rem]"></p>
+        </div>
+    </div>
+
+    <script>
+        const tabLogin = document.getElementById('tab-login');
+        const tabSignup = document.getElementById('tab-signup');
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        const message = document.getElementById('message');
+
+        tabLogin.onclick = () => {
+            tabLogin.className = 'flex-1 py-2 text-sm font-medium rounded-lg transition-all bg-brand-600 text-white';
+            tabSignup.className = 'flex-1 py-2 text-sm font-medium rounded-lg transition-all text-slate-400 hover:text-white';
+            loginForm.classList.remove('hidden');
+            signupForm.classList.add('hidden');
+            message.textContent = '';
+        };
+
+        tabSignup.onclick = () => {
+            tabSignup.className = 'flex-1 py-2 text-sm font-medium rounded-lg transition-all bg-brand-600 text-white';
+            tabLogin.className = 'flex-1 py-2 text-sm font-medium rounded-lg transition-all text-slate-400 hover:text-white';
+            signupForm.classList.remove('hidden');
+            loginForm.classList.add('hidden');
+            message.textContent = '';
+        };
+
+        loginForm.onsubmit = async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+            message.textContent = 'Verifying...';
+            
+            try {
+                const res = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    window.location.href = '/dashboard';
+                } else {
+                    message.textContent = data.error || 'Login failed';
+                }
+            } catch (err) {
+                message.textContent = 'Server error';
+            }
+        };
+
+        signupForm.onsubmit = async (e) => {
+            e.preventDefault();
+            const full_name = document.getElementById('signup-name').value;
+            const username = document.getElementById('signup-username').value;
+            const password = document.getElementById('signup-password').value;
+            message.textContent = 'Creating account...';
+            
+            try {
+                const res = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password, full_name })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    message.className = 'mt-6 text-center text-sm text-brand-500 font-medium min-h-[1.25rem]';
+                    message.textContent = 'Account created! Please login.';
+                    tabLogin.click();
+                } else {
+                    message.className = 'mt-6 text-center text-sm text-red-400 font-medium min-h-[1.25rem]';
+                    message.textContent = data.error || 'Signup failed';
+                }
+            } catch (err) {
+                message.textContent = 'Server error';
+            }
+        };
+    </script>
+</body>
+</html>

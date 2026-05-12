@@ -1,0 +1,115 @@
+/* Premium Design Tokens & Utilities */
+
+:root {
+    --brand-glow: rgba(34, 197, 94, 0.2);
+    --glass-bg: rgba(15, 23, 42, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #020617;
+}
+::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #334155;
+}
+
+/* Premium Components */
+.premium-input {
+    width: 100% !important;
+    background-color: #0f172a !important;
+    color: #ffffff !important;
+    border: 1px solid #334155 !important;
+    border-radius: 1rem !important;
+    padding: 1rem 1.5rem !important;
+    font-weight: 700 !important;
+    font-size: 1.25rem !important;
+    outline: none !important;
+    caret-color: #22c55e !important;
+    transition: all 0.3s ease;
+}
+
+.premium-input:focus {
+    border-color: #22c55e !important;
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.2) !important;
+    background-color: #020617 !important;
+}
+
+/* Fix Autofill issues */
+.premium-input:-webkit-autofill,
+.premium-input:-webkit-autofill:hover,
+.premium-input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #ffffff !important;
+    -webkit-box-shadow: 0 0 0px 1000px #0f172a inset !important;
+    transition: background-color 5000s ease-in-out 0s !important;
+}
+
+.premium-input::placeholder {
+    @apply text-slate-600 font-normal;
+}
+
+.premium-btn {
+    @apply bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-2xl transition-all duration-300 shadow-lg shadow-brand-900/20 active:scale-95 disabled:opacity-50 disabled:pointer-events-none;
+}
+
+.metric-glass {
+    @apply bg-slate-900/40 border border-slate-800/60 backdrop-blur-md rounded-2xl p-5 shadow-lg transition-all duration-300 hover:border-slate-700/80;
+}
+
+.field-group:hover label {
+    @apply text-slate-200 transition-colors duration-300;
+}
+
+/* Deduction Row Styling */
+.deduction-row {
+    @apply space-y-3;
+}
+
+.deduction-row header {
+    @apply flex justify-between items-center text-sm font-medium;
+}
+
+.deduction-row header span:first-child {
+    @apply text-slate-400;
+}
+
+.deduction-row header span:last-child {
+    @apply text-white font-bold;
+}
+
+/* Recommendation Styling */
+.recommendation-item {
+    @apply p-4 rounded-xl bg-slate-800/20 border-l-2 border-brand-500 text-sm text-slate-300 leading-relaxed transition-all hover:bg-slate-800/40;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+main > div > * {
+    animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.lg\:col-span-4 { animation-delay: 0.1s; }
+.lg\:col-span-8 > * { animation-delay: 0.2s; }
+
+/* Interactive Elements */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Form Section Hover Effects */
+section:hover {
+    @apply border-slate-700/60 transition-colors duration-500;
+}
